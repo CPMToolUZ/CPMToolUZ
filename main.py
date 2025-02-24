@@ -180,39 +180,22 @@ def get_all(request):
 
     a = requests.post(url, headers=headers, json=xx)
     return a
-def delete_account(id_token):
-    """ Firebase orqali akkauntni o‘chirish """
-    url = 'https://identitytoolkit.googleapis.com/v1/accounts:delete?key=AIzaSyAe_aOVT1gSfmHKBrorFvX4fRwN5nODXVA'
-    payload = {'idToken': id_token}
-
-    try:
-        response = requests.post(url, json=payload)
-        if response.status_code == 200:
-            print("✅ Akkaunt muvaffaqiyatli o‘chirildi!")
-            return True
-        else:
-            error_message = response.json().get('error', {}).get('message', 'Noma’lum xatolik')
-            print(f"❌ Xatolik: {error_message}")
-            return False
-    except requests.exceptions.RequestException as e:
-        print(f"⚠️ Serverga so‘rov jo‘natishda xatolik: {e}")
-        return False
-
-# Задаем пароль
 clear_screen()
+print_colored_text(" ██████╗██████╗ ███╗   ███╗ ████████╗ ██████╗  ██████╗ ██╗      ██╗    ██╗  ███████╗", "#ffffff") #1
+print_colored_text("██╔════╝██╔══██╗████╗ ████║ ╚══██╔══╝██╔═══██╗██╔═══██╗██║      ██║    ██║      ╔██╝      ", "#d9d7d2") #2
+print_colored_text("██║     ██████╔╝██╔████╔██║    ██║   ██║   ██║██║   ██║██║      ██║    ██║    ╔██╝", "#c2c1be") #3
+print_colored_text("██║     ██╔═══╝ ██║╚██╔╝██║    ██║   ██║   ██║██║   ██║██║      ██║    ██║  ╔██╝", "#9e9e9d") #4
+print_colored_text("╚██████╗██║     ██║ ╚═╝ ██║    ██║   ╚██████╔╝╚██████╔╝███████╗ █████████║  ███████╗", "#787672") #5
+print_colored_text(" ╚═════╝╚═╝     ╚═╝     ╚═╝    ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝  ╚═══════╝   ╚═════╝", "#525252") #6
 correct_password = "CPMTool"
-print("CPM Tool v1.0")
-print(Fore.BLUE+"OWNER: "+Fore.CYAN+"@CPMToolTeam")
-# Запрашиваем пароль
-print(Fore.YELLOW+"IP: "+Fore.CYAN+get_real_ip())
-password = pwinput.pwinput(prompt="Parolni kiriting: "+Fore.RED+"", mask="•")
+print("CPM Tool v1.0"+Fore.LIGHTWHITE_EX+" | "+Fore.WHITE+"EGA: "+Fore.GREEN+"@CPMToolTeam")
+print(Fore.WHITE+"IP: "+Fore.GREEN+get_real_ip())
+password = pwinput.pwinput(prompt=""+Fore.WHITE+"PAROLNI KIRITING: "+Fore.LIGHTCYAN_EX, mask="•")
 loader()
-# Проверяем пароль
-
 if password != correct_password:
     clear_screen()
     print("Parol xato!\nDastur yakunlandi. ❌")
-    sys.exit()  # Завершаем выполнение скрипта
+    sys.exit()
 else:
     print("Successful ✅")
     clear_screen()
@@ -242,7 +225,6 @@ while True:
  clear_screen()
  print(Fore.LIGHTWHITE_EX+"Akkauntga kirilmoqda! \n")
  loader()
- 
  if not token:
         clear_screen()
         print(Fore.RED+"Kirish xatosi!"+Fore.LIGHTWHITE_EX+"\nQaytadan urinib ko'ring.")
@@ -266,15 +248,15 @@ while True:
     print_colored_text(f" - Email: {email}","#c2c2be")
     print_colored_text(f" - Parol: {password}","#c2c2be")
     print(Fore.LIGHTWHITE_EX+" - Sizning real IP manzilingiz:",Fore.GREEN + get_real_ip())
-    print_colored_text(f" - Mamlakat: {geo_data.get('country_name', 'NaN')}"+f", {geo_data.get('city','NaN')}", "#c2c2c2")
-    print_colored_text(f" - Balance: {balance} │ Status: {status}","#c2c2be")
+    print_colored_text(f" - Mamlakat: {geo_data.get('country_name', 'Unknown')}"+f", {geo_data.get('city','Unknown')}", "#c2c2c2")
+    print_colored_text(f" - Balance: {balance} "+Fore.WHITE+"│"+Fore.WHITE+f" Status: {status}","#c2c2be")
     print_colored_text("╭─────────────────────────────────────────────────────────────╮", "#525252")
     print_colored_text("│                        CPM SERVICES                         │","#787672")
     print_colored_text("├──────────────────────────────┬┬─────────────────────────────┤","#9e9e9e")
     print_colored_text("│ [1] ➤ PUL SOLISH             ││  [2] ➤ COIN SOLISH          │","#c2c2be")
     print_colored_text("│ [3] ➤ KING RANK              ││  [4] ➤ ID O'ZGARTIRISH      │","#c2c2be")
     print_colored_text("│ [5] ➤ $ NARSANI OCHISH       ││  [6] ➤ FULL REGISTER        │","#9e9e9d")
-    print_colored_text("│ [7] ➤ AKKAUNTNI O'CHIRISH    ││  [0] ➤ CHIQISH              │","#9e9e9d")
+    print_colored_text("│ [0] ➤ CHIQISH                ││                             │","#9e9e9d")
     print_colored_text("├──────────────────────────────┴┴─────────────────────────────┤","#9e9e9e")
     print_colored_text("│                    MASHINALAR OCHILMAYDI!                   │","#787672")
     print_colored_text("╰─────────────────────────────────────────────────────────────╯", "#525252")
@@ -314,6 +296,3 @@ while True:
         add_fcoin(xtoken)
         get_king(xtoken)
         get_all(xtoken)
-    if command.lower() == "7":
-        delete_account(token)
-        success()
