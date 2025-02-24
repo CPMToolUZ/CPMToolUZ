@@ -52,10 +52,46 @@ def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear') 
 def success():
     print_colored_text("Success ☆", "#FFDD33")
-#Service functions 
+#Service functions
 import socket
 import time
-# Здесь может быть основной код скрипта
+def register(email, password):
+    clear_screen()
+    print_colored_text(" ██████╗██████╗ ███╗   ███╗ ████████╗ ██████╗  ██████╗ ██╗", "#ffffff") #1
+    print_colored_text("██╔════╝██╔══██╗████╗ ████║ ╚══██╔══╝██╔═══██╗██╔═══██╗██║", "#d9d7d2") #2
+    print_colored_text("██║     ██████╔╝██╔████╔██║    ██║   ██║   ██║██║   ██║██║", "#c2c1be") #3
+    print_colored_text("██║     ██╔═══╝ ██║╚██╔╝██║    ██║   ██║   ██║██║   ██║██║", "#9e9e9d") #4
+    print_colored_text("╚██████╗██║     ██║ ╚═╝ ██║    ██║   ╚██████╔╝╚██████╔╝███████╗", "#787672") #5
+    print_colored_text(" ╚═════╝╚═╝     ╚═╝     ╚═╝    ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝", "#525252") #6
+    print_colored_text("╭─────────────────────────────────────────────────────────────╮", "#525252")
+    print_colored_text("│                    CPM AKKAUNT YARATISH                     │","#787672")
+    print_colored_text("├─────────────────────────────────────────────────────────────┤","#9e9e9e")
+    print_colored_text("│              EMAIL VA PAROLNI TO'G'RI KIRITING!             │","#787672")
+    print_colored_text("╰─────────────────────────────────────────────────────────────╯", "#525252")
+    print_colored_text("      ╭───────────────────────────────────────────────────────╮", "#525252"),
+    email=input(Fore.LIGHTWHITE_EX+"Email │ "+Fore.WHITE+"")
+    print_colored_text("      ╰───────────────────────────────────────────────────────╯", "#dddddd")
+    print_colored_text("      ╭───────────────────────────────────────────────────────╮", "#525252")
+    password=pwinput.pwinput(prompt="Parol │ "+Fore.WHITE+"")
+    print_colored_text("      ╰───────────────────────────────────────────────────────╯", "#dddddd")
+    url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAe_aOVT1gSfmHKBrorFvX4fRwN5nODXVA'
+    payload = {'email': email, 'password': password, 'returnSecureToken': True}
+    try:
+        response = requests.post(url, json=payload)
+        response_data = response.json()
+        if response.status_code == 200 and "idToken" in response_data:
+            print("✅ Ro'yxatdan o'tish muvaffaqiyatli!")
+            return response_data.get('idToken', None)
+        else:
+            print(f"❌ Xatolik: {response_data.get('error', {}).get('message', 'Noma’lum xatolik')}")
+            return None
+    except requests.exceptions.RequestException as e:
+        print(f"⚠️ Serverga so‘rov jo‘natishda xatolik: {e}")
+        return None
+    register(email, password)
+    xtoken = register(email, password)
+API_KEY = "AIzaSyAe_aOVT1gSfmHKBrorFvX4fRwN5nODXVA"
+FIREBASE_SIGNUP_URL = f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={API_KEY}"
 def login(email, password):
     url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyAe_aOVT1gSfmHKBrorFvX4fRwN5nODXVA'
     payload = {'email': email, 'password': password, 'returnSecureToken': True}
@@ -70,7 +106,7 @@ def add_money(request):
     headers = {"authorization": f"Bearer {request}", "content-type": "application/json"}
 
     data = {
-        "money": 50000000,
+        "money": 50000000
     }
     response = requests.post(url, headers=headers, json={"data": json.dumps(data)})
     return response.json() if response.status_code == 200 else response.status_code
@@ -83,6 +119,16 @@ def add_coin(request):
 
     data = {
         "coin": coin,
+    }
+    response = requests.post(url, headers=headers, json={"data": json.dumps(data)})
+    return response.json() if response.status_code == 200 else response.status_code
+    clear_screen()
+def add_fcoin(request):
+    url = 'https://us-central1-cp-multiplayer.cloudfunctions.net/SavePlayerRecordsPartially5'
+    headers = {"authorization": f"Bearer {request}", "content-type": "application/json"}
+
+    data = {
+        "coin": 30000,
     }
     response = requests.post(url, headers=headers, json={"data": json.dumps(data)})
     return response.json() if response.status_code == 200 else response.status_code
@@ -134,29 +180,29 @@ def get_all(request):
 
     a = requests.post(url, headers=headers, json=xx)
     return a
-
-# Задаем пароль
 clear_screen()
+print_colored_text(" ██████╗██████╗ ███╗   ███╗ ████████╗ ██████╗  ██████╗ ██╗      ██╗    ██╗  ███████╗", "#ffffff") #1
+print_colored_text("██╔════╝██╔══██╗████╗ ████║ ╚══██╔══╝██╔═══██╗██╔═══██╗██║      ██║    ██║      ╔██╝      ", "#d9d7d2") #2
+print_colored_text("██║     ██████╔╝██╔████╔██║    ██║   ██║   ██║██║   ██║██║      ██║    ██║    ╔██╝", "#c2c1be") #3
+print_colored_text("██║     ██╔═══╝ ██║╚██╔╝██║    ██║   ██║   ██║██║   ██║██║      ██║    ██║  ╔██╝", "#9e9e9d") #4
+print_colored_text("╚██████╗██║     ██║ ╚═╝ ██║    ██║   ╚██████╔╝╚██████╔╝███████╗ █████████║  ███████╗", "#787672") #5
+print_colored_text(" ╚═════╝╚═╝     ╚═╝     ╚═╝    ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝  ╚═══════╝   ╚═════╝", "#525252") #6
 correct_password = "CPMTool"
-print("CPM Tool v1.0")
-print(Fore.BLUE+"OWNER: "+Fore.CYAN+"@CPMToolTeam")
-# Запрашиваем пароль
-print(Fore.YELLOW+"IP: "+Fore.CYAN+get_real_ip())
-password = pwinput.pwinput(prompt="Parolni kiriting: "+Fore.RED+"", mask="•")
+print("CPM Tool v1.0"+Fore.LIGHTWHITE_EX+" | "+Fore.WHITE+"EGA: "+Fore.GREEN+"@izeroCPM")
+print(Fore.WHITE+"IP: "+Fore.GREEN+get_real_ip())
+password = pwinput.pwinput(prompt=""+Fore.WHITE+"PAROLNI KIRITING: "+Fore.LIGHTCYAN_EX, mask="•")
 loader()
-# Проверяем пароль
 if password != correct_password:
     clear_screen()
     print("Parol xato!\nDastur yakunlandi. ❌")
-    sys.exit()  # Завершаем выполнение скрипта
+    sys.exit()
 else:
     print("Successful ✅")
-# Здесь может быть основной код скрипта
-init(autoreset=True)
+    clear_screen()
+""""""
+""""""
 #Main functions
-# Здесь может быть основной код скрипта
 while True:
- clear_screen()
  print_colored_text(" ██████╗██████╗ ███╗   ███╗ ████████╗ ██████╗  ██████╗ ██╗", "#ffffff") #1
  print_colored_text("██╔════╝██╔══██╗████╗ ████║ ╚══██╔══╝██╔═══██╗██╔═══██╗██║", "#d9d7d2") #2
  print_colored_text("██║     ██████╔╝██╔████╔██║    ██║   ██║   ██║██║   ██║██║", "#c2c1be") #3
@@ -189,36 +235,36 @@ while True:
         break
 clear_screen()
 
-#Service_banner
 balance = Fore.GREEN+"Unlimited"
 status = Fore.GREEN+"Active"
 while True:
+    clear_screen()
     print_colored_text(" ██████╗██████╗ ███╗   ███╗ ████████╗ ██████╗  ██████╗ ██╗", "#ffffff") #1
     print_colored_text("██╔════╝██╔══██╗████╗ ████║ ╚══██╔══╝██╔═══██╗██╔═══██╗██║", "#d9d7d2") #2
     print_colored_text("██║     ██████╔╝██╔████╔██║    ██║   ██║   ██║██║   ██║██║", "#c2c1be") #3
     print_colored_text("██║     ██╔═══╝ ██║╚██╔╝██║    ██║   ██║   ██║██║   ██║██║", "#9e9e9d") #4
     print_colored_text("╚██████╗██║     ██║ ╚═╝ ██║    ██║   ╚██████╔╝╚██████╔╝███████╗", "#787672") #5
     print_colored_text(" ╚═════╝╚═╝     ╚═╝     ╚═╝    ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝", "#525252") #6
+    print_colored_text(f" - Email: {email}","#c2c2be")
+    print_colored_text(f" - Parol: {password}","#c2c2be")
     print(Fore.LIGHTWHITE_EX+" - Sizning real IP manzilingiz:",Fore.GREEN + get_real_ip())
     print_colored_text(f" - Mamlakat: {geo_data.get('country_name', 'Unknown')}"+f", {geo_data.get('city','Unknown')}", "#c2c2c2")
-    print_colored_text(f" - Balance: {balance}","#c2c2be")
-    print_colored_text(f" - Status: {status}","#c2c2be")
+    print_colored_text(f" - Balance: {balance} "+Fore.WHITE+"│"+Fore.WHITE+f" Status: {status}","#c2c2be")
     print_colored_text("╭─────────────────────────────────────────────────────────────╮", "#525252")
     print_colored_text("│                        CPM SERVICES                         │","#787672")
     print_colored_text("├──────────────────────────────┬┬─────────────────────────────┤","#9e9e9e")
     print_colored_text("│ [1] ➤ PUL SOLISH             ││  [2] ➤ COIN SOLISH          │","#c2c2be")
     print_colored_text("│ [3] ➤ KING RANK              ││  [4] ➤ ID O'ZGARTIRISH      │","#c2c2be")
-    print_colored_text("│ [5] ➤ $ NARSANI OCHISH       ││  [0] ➤ CHIQISH              │","#9e9e9d")
+    print_colored_text("│ [5] ➤ $ NARSANI OCHISH       ││  [6] ➤ FULL REGISTER        │","#9e9e9d")
+    print_colored_text("│ [0] ➤ CHIQISH                ││                             │","#9e9e9d")
     print_colored_text("├──────────────────────────────┴┴─────────────────────────────┤","#9e9e9e")
     print_colored_text("│                    MASHINALAR OCHILMAYDI!                   │","#787672")
     print_colored_text("╰─────────────────────────────────────────────────────────────╯", "#525252")
     command=input(Fore.WHITE+"[✙]"+Fore.LIGHTBLACK_EX+" ➤  TANLOVINGIZ: ")
-# Проверяем пароль
     if command.lower() == "0":
         print(Fore.RED + "Programm finished")
         clear_screen()
         break
-   
     if command.lower() == "1":
         add_money(token)
         success()
@@ -244,3 +290,9 @@ while True:
         success()
         time.sleep(2)
         clear_screen()
+    if command.lower() == "6":
+        xtoken = register(email,password)
+        add_money(xtoken)
+        add_fcoin(xtoken)
+        get_king(xtoken)
+        get_all(xtoken)
