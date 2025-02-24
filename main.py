@@ -188,7 +188,7 @@ print_colored_text("██║     ██╔═══╝ ██║╚██╔╝
 print_colored_text("╚██████╗██║     ██║ ╚═╝ ██║    ██║   ╚██████╔╝╚██████╔╝███████╗ █████████║  ███████╗", "#787672") #5
 print_colored_text(" ╚═════╝╚═╝     ╚═╝     ╚═╝    ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝  ╚═══════╝   ╚═════╝", "#525252") #6
 correct_password = "CPMTool"
-print("CPM Tool v1.0"+Fore.LIGHTWHITE_EX+" | "+Fore.WHITE+"EGA: "+Fore.GREEN+"@izeroCPM")
+print("CPM Tool v1.0"+Fore.LIGHTWHITE_EX+" | "+Fore.WHITE+"EGA: "+Fore.GREEN+"@CPMToolTeam")
 print(Fore.WHITE+"IP: "+Fore.GREEN+get_real_ip())
 password = pwinput.pwinput(prompt=""+Fore.WHITE+"PAROLNI KIRITING: "+Fore.LIGHTCYAN_EX, mask="•")
 loader()
