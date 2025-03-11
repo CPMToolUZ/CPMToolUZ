@@ -200,7 +200,7 @@ def delete_account(id_token):
 
 # Задаем пароль
 clear_screen()
-correct_password = "CPMTool"
+correct_password = "XZ618671"
 print("CPM Tool v1.0"+Fore.LIGHTWHITE_EX+" | "+Fore.WHITE+"EGA: "+Fore.GREEN+"@CPMToolTeam")
 print(Fore.WHITE+"IP: "+Fore.GREEN+get_real_ip())
 password = pwinput.pwinput(prompt=""+Fore.WHITE+"PAROLNI KIRITING: "+Fore.LIGHTCYAN_EX, mask="•")
